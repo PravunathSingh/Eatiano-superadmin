@@ -12,6 +12,7 @@ import Error404 from './pages/Error404';
 import Signin from './pages/Signin';
 import { Auth } from './context/authContext';
 import AllRestaurants from './components/restaurants/AllRestaurants';
+import AddRestaurant from './components/restaurants/addRestaurant/AddRestaurant';
 
 function App() {
   const authCtx = useContext(Auth);
@@ -37,6 +38,7 @@ function App() {
             />
           )}
           <Route path='/restaurants' element={<AllRestaurants />} />
+          <Route path='/restaurants/add' element={<AddRestaurant />} />
           <Route path='*' element={<Error404 />} />
         </Routes>
       </ScrollToTop>
