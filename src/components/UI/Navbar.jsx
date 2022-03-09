@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Auth } from '../../context/authContext';
 
 const Navbar = () => {
   const [navToggle, setNavToggle] = useState(false);
 
   const showMobNav = () => {
     setNavToggle((value) => !value);
+  };
+
+  const authCtx = useContext(Auth);
+  const isLoggedIn = authCtx.isLoggedIn;
+
+  const logoutHandler = () => {
+    authCtx.logout();
   };
 
   return (
@@ -29,30 +37,52 @@ const Navbar = () => {
 
           <div className='hidden lg:block'>
             <ul className='hidden list-none lg:flex'>
-              <li className='py-2 font-medium text-gray-300 transition-all duration-200 md:text-lg hover:text-brand-text'>
-                <NavLink
-                  to='/'
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-brand-text'
-                      : 'text-gray-300 transition-all duration-200 hover:text-brand-text'
-                  }
+              {isLoggedIn && (
+                <li className='py-2 font-medium text-gray-300 transition-all duration-200 md:text-lg hover:text-brand-text'>
+                  <NavLink
+                    to='/'
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'text-brand-text'
+                        : 'text-gray-300 transition-all duration-200 hover:text-brand-text'
+                    }
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
+              {isLoggedIn && (
+                <li className='py-2 ml-6 font-medium text-gray-300 transition-all duration-200 md:text-lg hover:text-brand-text'>
+                  <NavLink
+                    to='/profile'
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'text-brand-text'
+                        : 'text-gray-300 transition-all duration-200 hover:text-brand-text'
+                    }
+                  >
+                    My Profile
+                  </NavLink>
+                </li>
+              )}
+
+              {isLoggedIn && (
+                <li
+                  className='py-2 ml-6 font-medium text-gray-300 transition-all duration-200 md:text-lg hover:text-brand-text'
+                  onClick={logoutHandler}
                 >
-                  Dashboard
-                </NavLink>
-              </li>
-              <li className='py-2 ml-6 font-medium text-gray-300 transition-all duration-200 md:text-lg hover:text-brand-text'>
-                <NavLink
-                  to='/profile'
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-brand-text'
-                      : 'text-gray-300 transition-all duration-200 hover:text-brand-text'
-                  }
-                >
-                  My Profile
-                </NavLink>
-              </li>
+                  <NavLink
+                    to='/signin'
+                    className={({ isActive }) =>
+                      isActive
+                        ? 'text-brand-text'
+                        : 'text-gray-300 transition-all duration-200 hover:text-brand-text'
+                    }
+                  >
+                    Logout
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
         </div>
