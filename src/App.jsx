@@ -13,6 +13,7 @@ import Signin from './pages/Signin';
 import { Auth } from './context/authContext';
 import AllRestaurants from './components/restaurants/AllRestaurants';
 import AddRestaurant from './components/restaurants/addRestaurant/AddRestaurant';
+import EditRestaurant from './components/restaurants/editRestaurant/EditRestaurant';
 
 function App() {
   const authCtx = useContext(Auth);
@@ -38,6 +39,7 @@ function App() {
             />
           )}
           <Route path='/restaurants' element={<AllRestaurants />} />
+          <Route path='/editRestaurant/:id' element={<EditRestaurant />} />
           <Route path='/restaurants/add' element={<AddRestaurant />} />
           <Route path='*' element={<Error404 />} />
         </Routes>

@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { Auth } from '../../../context/authContext';
 
-const AddRestaurant = () => {
-  const [newRestaurant, setNewRestaurant] = useState({
+const EditRestaurant = () => {
+  const [editRestaurant, setEditRestaurant] = useState({
     name: '',
-    address: '',
     phone: '',
+    address: '',
     lat: '',
     long: '',
     metaData: '',
@@ -15,13 +16,40 @@ const AddRestaurant = () => {
   const authCtx = useContext(Auth);
   const token = authCtx.token;
 
-  const [restaurantImage, setRestaurantImage] = useState(null);
+  const [restaurantImg, setRestaurantImg] = useState(null);
+  const { id } = useParams();
 
-  const newRestaurantHandler = (e) => {
-    setNewRestaurant({ ...newRestaurant, [e.target.name]: e.target.value });
+  useEffect(() => {
+    const restaurantData = async () => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get(
+        `https://achievexsolutions.in/current_work/eatiano/api/super_admin/edit_restaurant/${id}`,
+        config
+      );
+
+      const resData = response.data.data;
+      setEditRestaurant({
+        name: resData.restaurant_name,
+        phone: resData.restaurant_ph,
+        address: resData.restaurant_address,
+        lat: resData.lat,
+        long: resData.lng,
+        metaData: resData.restaurant_meta_deta,
+      });
+    };
+
+    restaurantData();
+  }, []);
+
+  const editRestaurantHandler = (e) => {
+    setEditRestaurant({ ...editRestaurant, [e.target.name]: e.target.value });
   };
 
-  const addNewRestaurant = async (e) => {
+  const editRestaurantSubmission = async (e) => {
     e.preventDefault();
     const config = {
       headers: {
@@ -31,21 +59,21 @@ const AddRestaurant = () => {
     };
 
     const formData = new FormData();
-    formData.append('restaurant_image', restaurantImage);
-    formData.append('restaurant_name', newRestaurant.name);
-    formData.append('restaurant_ph', newRestaurant.phone);
-    formData.append('restaurant_address', newRestaurant.address);
-    formData.append('lat', newRestaurant.lat);
-    formData.append('lng', newRestaurant.long);
-    formData.append('restaurant_meta_deta', newRestaurant.metaData);
+    formData.append('restaurant_image', restaurantImg);
+    formData.append('restaurant_name', editRestaurant.name);
+    formData.append('restaurant_ph', editRestaurant.phone);
+    formData.append('restaurant_address', editRestaurant.address);
+    formData.append('lat', editRestaurant.lat);
+    formData.append('lng', editRestaurant.long);
+    formData.append('restaurant_meta_deta', editRestaurant.metaData);
 
-    const response = await axios.post(
-      'https://achievexsolutions.in/current_work/eatiano/api/super_admin/add_restaurant',
+    const response = await axios.patch(
+      `https://achievexsolutions.in/current_work/eatiano/api/super_admin/edit_restaurant/${id}`,
       formData,
       config
     );
 
-    setNewRestaurant({
+    setEditRestaurant({
       name: '',
       phone: '',
       address: '',
@@ -54,7 +82,7 @@ const AddRestaurant = () => {
       address: '',
       metaData: '',
     });
-    setRestaurantImage(null);
+    setRestaurantImg(null);
 
     const resData = await response.data;
     console.log(resData);
@@ -63,11 +91,11 @@ const AddRestaurant = () => {
   return (
     <div className='container my-24 md:my-32 lg:my-44 font-rubik'>
       <h1 className='mb-10 text-center text-gray-100 md:text-2xl lg:text-3xl md:mb-16'>
-        Add New Restaurant
+        Edit Restaurant
       </h1>
 
       <div className='max-w-4xl p-5 mx-auto rounded-lg shadow-lg md:p-10 bg-secondary'>
-        <form onSubmit={addNewRestaurant}>
+        <form onSubmit={editRestaurantSubmission}>
           <div className='grid gap-8 md:grid-cols-2'>
             <div className='col-span-2 md:col-span-1'>
               <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
@@ -77,8 +105,8 @@ const AddRestaurant = () => {
                 type='text'
                 required
                 name='name'
-                value={newRestaurant.name}
-                onChange={newRestaurantHandler}
+                value={editRestaurant.name}
+                onChange={editRestaurantHandler}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
             </div>
@@ -90,8 +118,8 @@ const AddRestaurant = () => {
               <input
                 type='number'
                 name='phone'
-                value={newRestaurant.phone}
-                onChange={newRestaurantHandler}
+                value={editRestaurant.phone}
+                onChange={editRestaurantHandler}
                 required
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
@@ -104,8 +132,8 @@ const AddRestaurant = () => {
               <input
                 type='number'
                 name='lat'
-                value={newRestaurant.lat}
-                onChange={newRestaurantHandler}
+                value={editRestaurant.lat}
+                onChange={editRestaurantHandler}
                 required
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
@@ -119,8 +147,8 @@ const AddRestaurant = () => {
                 type='number'
                 required
                 name='long'
-                onChange={newRestaurantHandler}
-                value={newRestaurant.long}
+                onChange={editRestaurantHandler}
+                value={editRestaurant.long}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
             </div>
@@ -133,8 +161,8 @@ const AddRestaurant = () => {
                 type='text'
                 required
                 name='metaData'
-                value={newRestaurant.metaData}
-                onChange={newRestaurantHandler}
+                value={editRestaurant.metaData}
+                onChange={editRestaurantHandler}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
             </div>
@@ -150,7 +178,7 @@ const AddRestaurant = () => {
                 name='restaurant_image'
                 onChange={(e) => {
                   console.log(e.target.files[0]);
-                  setRestaurantImage(e.target.files[0]);
+                  setRestaurantImg(e.target.files[0]);
                 }}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
@@ -164,8 +192,8 @@ const AddRestaurant = () => {
                 cols='30'
                 rows='3'
                 name='address'
-                onChange={newRestaurantHandler}
-                value={newRestaurant.address}
+                onChange={editRestaurantHandler}
+                value={editRestaurant.address}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               ></textarea>
             </div>
@@ -175,7 +203,7 @@ const AddRestaurant = () => {
             type='submit'
             className='w-full px-8 py-2 mt-10 text-lg font-medium text-gray-900 transition-all duration-300 rounded-lg hover:text bg-cta md:text-xl hover:bg-cta-dark hover:-translate-y-3 focus:ring-2 ring-offset-2 ring-cta-dark'
           >
-            Add Restaurant
+            Edit Restaurant
           </button>
         </form>
       </div>
@@ -183,4 +211,4 @@ const AddRestaurant = () => {
   );
 };
 
-export default AddRestaurant;
+export default EditRestaurant;
