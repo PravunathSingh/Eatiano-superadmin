@@ -3,53 +3,51 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Auth } from '../../../context/authContext';
 
-const EditRestaurant = () => {
-  const [editRestaurant, setEditRestaurant] = useState({
+const EditProduct = () => {
+  const [editProduct, setEditProduct] = useState({
     name: '',
-    phone: '',
-    address: '',
-    lat: '',
-    long: '',
+    description: '',
+    sellingPrice: '',
     metaData: '',
+    quantity: '',
   });
 
   const authCtx = useContext(Auth);
   const token = authCtx.token;
 
-  const [restaurantImg, setRestaurantImg] = useState(null);
+  const [productImg, setProductImg] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    const restaurantData = async () => {
+    const productData = async () => {
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
       const response = await axios.get(
-        `https://achievexsolutions.in/current_work/eatiano/api/super_admin/edit_restaurant/${id}`,
+        `https://achievexsolutions.in/current_work/eatiano/api/super_admin/edit_product/${id}`,
         config
       );
 
       const resData = response.data.data;
-      setEditRestaurant({
-        name: resData.restaurant_name,
-        phone: resData.restaurant_ph,
-        address: resData.restaurant_address,
-        lat: resData.lat,
-        long: resData.lng,
-        metaData: resData.restaurant_meta_deta,
+      setEditProduct({
+        name: resData[0].product_name,
+        quantity: resData[0].product_quantity,
+        description: resData[0].product_description,
+        metaData: resData[0].product_meta_data,
+        sellingPrice: resData[0].product_selling_price,
       });
     };
 
-    restaurantData();
+    productData();
   }, []);
 
-  const editRestaurantHandler = (e) => {
-    setEditRestaurant({ ...editRestaurant, [e.target.name]: e.target.value });
+  const editProductHandler = (e) => {
+    setEditProduct({ ...editProduct, [e.target.name]: e.target.value });
   };
 
-  const editRestaurantSubmission = async (e) => {
+  const editProductSubmission = async (e) => {
     e.preventDefault();
     const config = {
       headers: {
@@ -60,66 +58,64 @@ const EditRestaurant = () => {
     };
 
     const formData = new URLSearchParams();
-    formData.append('restaurant_image', restaurantImg);
-    formData.append('restaurant_name', editRestaurant.name);
-    formData.append('restaurant_ph', editRestaurant.phone);
-    formData.append('restaurant_address', editRestaurant.address);
-    formData.append('lat', editRestaurant.lat);
-    formData.append('lng', editRestaurant.long);
-    formData.append('restaurant_meta_deta', editRestaurant.metaData);
+    formData.append('product_image', productImg);
+    formData.append('product_name', editProduct.name);
+    formData.append('product_description', editProduct.description);
+    formData.append('product_meta_data', editProduct.metaData);
+    formData.append('product_quantity', editProduct.quantity);
+    formData.append('product_selling_price', editProduct.sellingPrice);
 
     const response = await axios.patch(
-      `https://achievexsolutions.in/current_work/eatiano/api/super_admin/edit_restaurant/${id}`,
+      `https://achievexsolutions.in/current_work/eatiano/api/super_admin/edit_product/${id}`,
       formData,
       config
     );
 
-    setEditRestaurant({
+    setEditProduct({
       name: '',
-      phone: '',
-      address: '',
-      lat: '',
-      long: '',
+      description: '',
+      sellingPrice: '',
       metaData: '',
+      quantity: '',
     });
-    setRestaurantImg(null);
+    setProductImg(null);
 
-    const resData = await response.data;
+    const resData = response.data;
     console.log(resData);
   };
 
   return (
     <div className='container my-24 md:my-32 lg:my-44 font-rubik'>
       <h1 className='mb-10 text-center text-gray-100 md:text-2xl lg:text-3xl md:mb-16'>
-        Edit Restaurant
+        Edit Product
       </h1>
 
       <div className='max-w-4xl p-5 mx-auto rounded-lg shadow-lg md:p-10 bg-secondary'>
-        <form onSubmit={editRestaurantSubmission}>
+        <form onSubmit={editProductSubmission}>
           <div className='grid gap-8 md:grid-cols-2'>
             <div className='col-span-2 md:col-span-1'>
               <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Restaurant Name*</label>
+                <label>Product Name*</label>
               </h6>
               <input
                 type='text'
                 required
                 name='name'
-                value={editRestaurant.name}
-                onChange={editRestaurantHandler}
+                value={editProduct.name}
+                onChange={editProductHandler}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
             </div>
 
             <div className='col-span-2 md:col-span-1'>
               <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Restaurant Phone*</label>
+                <label>Product Quantity*</label>
               </h6>
               <input
                 type='number'
-                name='phone'
-                value={editRestaurant.phone}
-                onChange={editRestaurantHandler}
+                name='quantity'
+                value={editProduct.quantity}
+                onChange={editProductHandler}
                 required
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
@@ -127,13 +123,13 @@ const EditRestaurant = () => {
 
             <div className='col-span-2 md:col-span-1'>
               <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Restaurant Latitude*</label>
+                <label>Selling Price*</label>
               </h6>
               <input
                 type='number'
-                name='lat'
-                value={editRestaurant.lat}
-                onChange={editRestaurantHandler}
+                name='sellingPrice'
+                value={editProduct.sellingPrice}
+                onChange={editProductHandler}
                 required
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
@@ -141,44 +137,30 @@ const EditRestaurant = () => {
 
             <div className='col-span-2 md:col-span-1'>
               <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Restaurant Longitude*</label>
-              </h6>
-              <input
-                type='number'
-                required
-                name='long'
-                onChange={editRestaurantHandler}
-                value={editRestaurant.long}
-                className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
-              />
-            </div>
-
-            <div className='col-span-2 md:col-span-1'>
-              <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Restaurant Meta Data*</label>
+                <label>Product Meta Data*</label>
               </h6>
               <input
                 type='text'
                 required
                 name='metaData'
-                value={editRestaurant.metaData}
-                onChange={editRestaurantHandler}
+                value={editProduct.metaData}
+                onChange={editProductHandler}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
             </div>
 
             <div className='col-span-2 md:col-span-1'>
               <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Restaurant Image*</label>
+                <label>Product Image*</label>
               </h6>
               <input
                 type='file'
                 required
                 accept='image/*'
-                name='restaurant_image'
+                name='product_image'
                 onChange={(e) => {
                   console.log(e.target.files[0]);
-                  setRestaurantImg(e.target.files[0]);
+                  setProductImg(e.target.files[0]);
                 }}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
@@ -186,14 +168,14 @@ const EditRestaurant = () => {
 
             <div className='col-span-2'>
               <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Restaurant Address*</label>
+                <label>Product Description*</label>
               </h6>
               <textarea
                 cols='30'
                 rows='3'
-                name='address'
-                onChange={editRestaurantHandler}
-                value={editRestaurant.address}
+                name='description'
+                onChange={editProductHandler}
+                value={editProduct.description}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               ></textarea>
             </div>
@@ -203,7 +185,7 @@ const EditRestaurant = () => {
             type='submit'
             className='w-full px-8 py-2 mt-10 text-lg font-medium text-gray-900 transition-all duration-300 rounded-lg hover:text bg-cta md:text-xl hover:bg-cta-dark hover:-translate-y-3 focus:ring-2 ring-offset-2 ring-cta-dark'
           >
-            Edit Restaurant
+            Edit Product
           </button>
         </form>
       </div>
@@ -211,4 +193,4 @@ const EditRestaurant = () => {
   );
 };
 
-export default EditRestaurant;
+export default EditProduct;

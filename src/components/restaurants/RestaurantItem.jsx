@@ -23,14 +23,14 @@ const RestaurantItem = ({ restaurantData }) => {
         <i className='fa fa-map-marker'></i> {restaurantData.restaurant_address}
       </p>
 
-      <div className='flex items-center justify-around'>
+      <div className='flex items-center justify-between'>
         <p className='text-gray-300'>Lat: {restaurantData.lat}</p>
         <p className='text-gray-300'>Lng: {restaurantData.lng}</p>
       </div>
 
       <div className='flex items-center justify-around mt-5'>
         <Link
-          to={`/menu/restaurant/${restaurantData.restaurant_id}`}
+          to={`/restaurantProducts/${restaurantData.restaurant_id}`}
           className='text-brand-text hover:text-border'
         >
           View All Items
