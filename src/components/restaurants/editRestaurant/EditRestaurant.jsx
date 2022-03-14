@@ -86,6 +86,7 @@ const EditRestaurant = () => {
 
     const resData = await response.data;
     console.log(resData);
+    window.location.reload();
   };
 
   return (
