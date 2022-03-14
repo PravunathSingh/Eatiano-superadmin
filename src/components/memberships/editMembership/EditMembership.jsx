@@ -7,6 +7,8 @@ const EditMembership = () => {
   const [editMembership, setEditMembership] = useState({
     membershipType: '',
     membershipPrice: '',
+    timePeriod: '',
+    discountPercent: '',
   });
 
   const authCtx = useContext(Auth);
@@ -30,6 +32,8 @@ const EditMembership = () => {
       setEditMembership({
         membershipType: resData.membership_type_name,
         membershipPrice: resData.membership_price,
+        timePeriod: resData.time_period,
+        discountPercent: resData.discount_percent,
       });
     };
 
@@ -53,6 +57,8 @@ const EditMembership = () => {
     const formData = new URLSearchParams();
     formData.append('membership_type_name', editMembership.membershipType);
     formData.append('membership_price', editMembership.membershipPrice);
+    formData.append('time_period', editMembership.timePeriod);
+    formData.append('discount_percent', editMembership.discountPercent);
 
     const response = await axios.patch(
       `https://achievexsolutions.in/current_work/eatiano/api/super_admin/membership/${id}`,
@@ -63,6 +69,8 @@ const EditMembership = () => {
     setEditMembership({
       membershipType: '',
       membershipPrice: '',
+      timePeriod: '',
+      discountPercent: '',
     });
 
     const resData = response.data;
@@ -96,12 +104,40 @@ const EditMembership = () => {
 
             <div className='col-span-2 md:col-span-1'>
               <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Coupon Discount*</label>
+                <label>Membership Price*</label>
               </h6>
               <input
                 type='number'
                 name='membershipPrice'
                 value={editMembership.membershipPrice}
+                onChange={editMembershipHandler}
+                required
+                className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
+              />
+            </div>
+
+            <div className='col-span-2 md:col-span-1'>
+              <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
+                <label>Discount Percent*</label>
+              </h6>
+              <input
+                type='number'
+                name='discountPercent'
+                value={editMembership.discountPercent}
+                onChange={editMembershipHandler}
+                required
+                className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
+              />
+            </div>
+
+            <div className='col-span-2 md:col-span-1'>
+              <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
+                <label>Time Period*</label>
+              </h6>
+              <input
+                type='number'
+                name='timePeriod'
+                value={editMembership.timePeriod}
                 onChange={editMembershipHandler}
                 required
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
