@@ -7,6 +7,7 @@ import RestaurantsProvider from './context/restaurantsContext';
 import BlogsProvider from './context/blogsContext';
 import CouponsProvider from './context/couponContext';
 import MembershipsProvider from './context/membershipContext';
+import AgentsProvider from './context/deliveryContext';
 
 ReactDOM.render(
   <AuthProvider>
@@ -14,9 +15,11 @@ ReactDOM.render(
       <BlogsProvider>
         <CouponsProvider>
           <MembershipsProvider>
-            <React.StrictMode>
-              <App />
-            </React.StrictMode>
+            <AgentsProvider>
+              <React.StrictMode>
+                <App />
+              </React.StrictMode>
+            </AgentsProvider>
           </MembershipsProvider>
         </CouponsProvider>
       </BlogsProvider>

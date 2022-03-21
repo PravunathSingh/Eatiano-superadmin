@@ -4,6 +4,8 @@ import DashboardCard from '../UI/DashboardCard';
 import { Restaurants } from '../../context/restaurantsContext';
 import { Blogs } from '../../context/blogsContext';
 import { Coupons } from '../../context/couponContext';
+import { Memberships } from '../../context/membershipContext';
+import { Agents } from '../../context/deliveryContext';
 
 const DashboardStats = () => {
   const restaurantsCtx = useContext(Restaurants);
@@ -15,16 +17,22 @@ const DashboardStats = () => {
   const couponsCtx = useContext(Coupons);
   const coupons = couponsCtx.allCoupons;
 
+  const membershipsCtx = useContext(Memberships);
+  const memberships = membershipsCtx.memberships;
+
+  const agentsCtx = useContext(Agents);
+  const agents = agentsCtx.allAgents;
+
   return (
-    <div className='container grid gap-8 mt-16 font-rubik md:grid-cols-2 lg:grid-cols-4 md:place-content-center place-items-center md:mt-24 lg:mt-32'>
+    <div className='container grid gap-16 my-16 font-rubik md:grid-cols-2 lg:grid-cols-4 md:place-content-center place-items-center md:my-24 lg:my-32'>
       <Link
         to='/memberships'
         className='w-full transition-all duration-200 bg-green-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
       >
         <DashboardCard
-          figures='10.4k'
+          figures={memberships.length}
           figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-green-900 text-center'
-          type='Users'
+          type='Membership Types'
           typeStyle='text-xl lg:text-2xl text-green-700 text-center font-medium'
         />
       </Link>
@@ -61,6 +69,18 @@ const DashboardStats = () => {
           figures={coupons.length}
           figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-blue-900 text-center'
           type='Coupons'
+          typeStyle='text-xl lg:text-2xl text-blue-700 text-center font-medium'
+        />
+      </Link>
+
+      <Link
+        to='/deliveryAgents'
+        className='w-full transition-all duration-200 bg-blue-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
+      >
+        <DashboardCard
+          figures={agents.length}
+          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-blue-900 text-center'
+          type='Delivery Partners'
           typeStyle='text-xl lg:text-2xl text-blue-700 text-center font-medium'
         />
       </Link>

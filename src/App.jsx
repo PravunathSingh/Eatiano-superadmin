@@ -27,6 +27,8 @@ import EditCoupon from './components/coupons/editCoupon/EditCoupon';
 import AllMemberships from './components/memberships/AllMemberships';
 import AddMembership from './components/memberships/addMembership/AddMembership';
 import EditMembership from './components/memberships/editMembership/EditMembership';
+import AddDelivery from './components/delivery/addDelivery/AddDelivery';
+import AllDeliveryAgents from './components/delivery/AllDeliveryAgents';
 
 function App() {
   const authCtx = useContext(Auth);
@@ -55,6 +57,7 @@ function App() {
           <Route path='/blogs' element={<AllBlogs />} />
           <Route path='/coupons' element={<AllCoupons />} />
           <Route path='/memberships' element={<AllMemberships />} />
+          <Route path='/deliveryAgents' element={<AllDeliveryAgents />} />
           <Route path='/editRestaurant/:id' element={<EditRestaurant />} />
           <Route path='/editCoupon/:id' element={<EditCoupon />} />
           <Route path='/editProduct/:id' element={<EditProduct />} />
@@ -64,6 +67,7 @@ function App() {
           <Route path='/restaurantProducts/:id' element={<AllProducts />} />
           <Route path='/restaurantProducts/add/:id' element={<AddProduct />} />
           <Route path='/restaurants/add' element={<AddRestaurant />} />
+          <Route path='/deliveryAgents/add' element={<AddDelivery />} />
           <Route path='/coupons/add' element={<AddCoupon />} />
           <Route path='/blogs/add' element={<AddBlog />} />
           <Route path='/memberships/add' element={<AddMembership />} />
