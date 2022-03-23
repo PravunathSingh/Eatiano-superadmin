@@ -29,6 +29,14 @@ import AddMembership from './components/memberships/addMembership/AddMembership'
 import EditMembership from './components/memberships/editMembership/EditMembership';
 import AddDelivery from './components/delivery/addDelivery/AddDelivery';
 import AllDeliveryAgents from './components/delivery/AllDeliveryAgents';
+import AllExpenses from './components/expenses/AllExpenses';
+import AddExpense from './components/expenses/addExpense/AddExpense';
+import AllAdmin from './components/admin/AllAdmin';
+import AddAdmin from './components/admin/addAdmin/AddAdmin';
+import AdminWarehouse from './components/admin/warehouse/AdminWarehouse';
+import AddWarehouse from './components/admin/warehouse/addWarehouse/AddWarehouse';
+import AllWarehouse from './components/warehouse/AllWarehouse';
+import OtherStats from './components/otherStats/OtherStats';
 
 function App() {
   const authCtx = useContext(Auth);
@@ -56,6 +64,9 @@ function App() {
           <Route path='/restaurants' element={<AllRestaurants />} />
           <Route path='/blogs' element={<AllBlogs />} />
           <Route path='/coupons' element={<AllCoupons />} />
+          <Route path='/admins' element={<AllAdmin />} />
+          <Route path='/expenses' element={<AllExpenses />} />
+          <Route path='/warehouses' element={<AllWarehouse />} />
           <Route path='/memberships' element={<AllMemberships />} />
           <Route path='/deliveryAgents' element={<AllDeliveryAgents />} />
           <Route path='/editRestaurant/:id' element={<EditRestaurant />} />
@@ -65,12 +76,17 @@ function App() {
           <Route path='/editMembership/:id' element={<EditMembership />} />
           <Route path='/blogDetails/:id' element={<BlogDetails />} />
           <Route path='/restaurantProducts/:id' element={<AllProducts />} />
+          {/* <Route path='/admin/warehouse/:id' element={<AdminWarehouse />} /> */}
           <Route path='/restaurantProducts/add/:id' element={<AddProduct />} />
+          {/* <Route path='/admin/warehouse/add/:id' element={<AddWarehouse />} /> */}
           <Route path='/restaurants/add' element={<AddRestaurant />} />
+          <Route path='/expenses/add' element={<AddExpense />} />
+          <Route path='/admin/add' element={<AddAdmin />} />
           <Route path='/deliveryAgents/add' element={<AddDelivery />} />
           <Route path='/coupons/add' element={<AddCoupon />} />
           <Route path='/blogs/add' element={<AddBlog />} />
           <Route path='/memberships/add' element={<AddMembership />} />
+          <Route path='/otherStats' element={<OtherStats />} />
           <Route path='*' element={<Error404 />} />
         </Routes>
       </ScrollToTop>

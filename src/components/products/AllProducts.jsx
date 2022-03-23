@@ -53,6 +53,7 @@ const AllProducts = () => {
     e.preventDefault();
     setSearchTerm('');
   };
+
   return (
     <div className='container mt-24 md:mt-32 lg:mt-48 font-rubik'>
       <h2 className='mb-10 text-center text-gray-100 lg:text-left md:text-2xl lg:text-3xl md:mb-16'>

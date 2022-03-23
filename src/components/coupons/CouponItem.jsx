@@ -18,7 +18,8 @@ const CouponItem = ({ couponData }) => {
         Discount: {couponData.discount} %
       </h6>
       <p className='mb-4 text-sm font-light leading-relaxed text-center text-gray-300 md:mb-5'>
-        Coupon Applies When Order Amount is {couponData.condition} Rupees
+        Coupon Applies When Order Amount is greater than {couponData.condition}{' '}
+        Rupees
       </p>
 
       <div className='flex items-center justify-around mt-5'>

@@ -1,28 +1,29 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Admin } from '../../context/adminContext';
-import AdminList from './AdminList';
+import { Expenses } from '../../context/expensesContext';
+import ExpenseList from './ExpenseList';
 
-const AllAdmin = () => {
+const AllExpenses = () => {
+  const expensesCtx = useContext(Expenses);
+  const expenses = expensesCtx.expenses;
+
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const searchRef = useRef();
 
-  const adminCtx = useContext(Admin);
-  const allAdmins = adminCtx.allAdmin;
+  const searchRef = useRef();
 
   const searchHandler = (e) => {
     setSearchTerm(e.target.value);
     if (searchTerm !== '') {
-      const filteredAdmin = allAdmins.filter((admin) => {
-        return Object.values(admin)
+      const filteredExpenses = expenses.filter((expense) => {
+        return Object.values(expense)
           .join(' ')
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
       });
-      setSearchResults(filteredAdmin);
+      setSearchResults(filteredExpenses);
     } else {
-      setSearchResults(allAdmins);
+      setSearchResults(expenses);
     }
   };
 
@@ -30,10 +31,11 @@ const AllAdmin = () => {
     e.preventDefault();
     setSearchTerm('');
   };
+
   return (
     <div className='container mt-24 md:mt-32 lg:mt-48 font-rubik'>
       <h2 className='mb-10 text-center text-gray-100 lg:text-left md:text-2xl lg:text-3xl md:mb-16'>
-        All Admins
+        All Expenses
       </h2>
 
       <div className='grid gap-2 md:gap-6 md:grid-cols-4 lg:grid-cols-7 md:place-content-center md:place-items-center'>
@@ -41,7 +43,7 @@ const AllAdmin = () => {
           <form onSubmit={searchFormHandler}>
             <input
               type='text'
-              placeholder='Search Admin...'
+              placeholder='Search Expenses...'
               className='w-full px-4 py-2 text-gray-200 border-2 rounded-md border-secondary lg:text-lg bg-primary focus:ring-2 ring-offset-2 ring-offset-secondary'
               ref={searchRef}
               onChange={searchHandler}
@@ -51,19 +53,19 @@ const AllAdmin = () => {
         </div>
 
         <div className='md:col-span-2 lg:col-span-2'>
-          <Link to='/admin/add'>
+          <Link to='/expenses/add'>
             <button className='w-full px-8 py-2 my-6 text-lg font-medium text-gray-900 transition-all duration-300 rounded-lg md:w-auto hover:text bg-cta md:text-xl hover:bg-cta-dark hover:scale-110 focus:ring-2 ring-offset-2 ring-cta-dark'>
-              Add New Admin
+              Add New Expense
             </button>
           </Link>
         </div>
       </div>
 
-      <AdminList
-        allAdmins={searchTerm.length < 1 ? allAdmins : searchResults}
+      <ExpenseList
+        expenses={searchTerm.length < 1 ? expenses : searchResults}
       />
     </div>
   );
 };
 
-export default AllAdmin;
+export default AllExpenses;
