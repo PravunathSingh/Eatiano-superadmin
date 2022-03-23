@@ -124,7 +124,7 @@ const OtherStats = () => {
           </h1>
           <form onSubmit={getRevenue}>
             <input
-              type='number'
+              type='text'
               placeholder='Start Date in YYYY-MM-DD Format'
               className='w-full px-4 py-2 mb-4 text-gray-200 border-2 rounded-md border-secondary lg:text-lg bg-primary focus:ring-2 ring-offset-2 ring-offset-secondary'
               name='startDate'
@@ -133,7 +133,7 @@ const OtherStats = () => {
             />
 
             <input
-              type='number'
+              type='text'
               placeholder='End Date in YYYY-MM-DD Format'
               className='w-full px-4 py-2 mb-4 text-gray-200 border-2 rounded-md border-secondary lg:text-lg bg-primary focus:ring-2 ring-offset-2 ring-offset-secondary'
               name='endDate'
