@@ -10,15 +10,20 @@ const ExpenseItem = ({ expense }) => {
   };
 
   return (
-    <div>
-      <h6 className='mb-3 font-medium text-center text-gray-100 lg:text-lg'>
-        Expense Name: {expense.name}
+    <div className='p-6 transition-all duration-200 rounded-lg shadow-lg bg-secondary hover:-translate-y-3'>
+      <h6 className='mb-5 text-xl leading-relaxed text-center text-gray-100 lg:leading-relaxed lg:mb-8 lg:text-2xl'>
+        Expense Name:{' '}
+        <span className='font-medium text-brand-text'>{expense.name}</span>
       </h6>
-      <h6 className='mb-4 font-medium text-center text-gray-200'>
-        Expense Amount: {expense.amount}
+      <h6 className='mb-4 text-center text-gray-200'>
+        Expense Amount:{' '}
+        <span className='font-medium text-cta-dark'>{expense.amount}</span>
       </h6>
       <p className='mb-4 text-sm font-light leading-relaxed text-center text-gray-300 md:mb-5'>
-        Time Period For Expense: {expense.time_period} days
+        Time Period For Expense:{' '}
+        <span className='font-normal text-gray-100'>
+          {expense.time_period} days
+        </span>
       </p>
 
       <h6 className='mb-4 font-medium text-center text-gray-200'>

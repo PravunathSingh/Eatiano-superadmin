@@ -9,7 +9,7 @@ const AllMemberships = () => {
 
   return (
     <div className='container mt-24 md:mt-32 lg:mt-48 font-rubik'>
-      <div className='flex items-center justify-between'>
+      <div className='flex flex-wrap items-center justify-between'>
         <h2 className='text-gray-100 lg:text-left md:text-2xl lg:text-3xl'>
           All Memberships
         </h2>

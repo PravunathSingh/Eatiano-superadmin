@@ -10,7 +10,7 @@ const MembershipItem = ({ membershipData }) => {
   };
 
   return (
-    <div>
+    <div className='p-6 transition-all duration-200 rounded-lg shadow-lg bg-secondary hover:-translate-y-3'>
       <h6 className='mb-3 text-lg font-medium text-center text-gray-100 lg:text-xl'>
         {membershipData.membership_type_name}
       </h6>

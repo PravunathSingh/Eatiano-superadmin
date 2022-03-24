@@ -10,20 +10,18 @@ const AdminItem = ({ admin }) => {
   };
 
   return (
-    <div>
-      <h6 className='mb-3 text-lg font-medium text-center text-gray-100 lg:text-xl'>
+    <div className='p-6 transition-all duration-200 rounded-lg shadow-lg bg-secondary hover:-translate-y-3'>
+      <h6 className='mb-5 text-xl font-medium text-center text-gray-100 lg:mb-8 lg:text-2xl'>
         {admin.name}
       </h6>
 
-      <h6 className='mb-4 font-medium text-center text-gray-200'>
-        {admin.email}
-      </h6>
+      <h6 className='mb-4 text-center text-cta-dark'>{admin.email}</h6>
       <p className='mb-4 leading-relaxed text-center text-gray-200 md:mb-5'>
         {admin.phone}
       </p>
 
       <p className='mb-4 leading-relaxed text-center text-gray-200 md:mb-5'>
-        Country: {admin.country}
+        Country: <span className='text-brand-text'>{admin.country}</span>
       </p>
 
       <p className='mb-4 text-sm font-light leading-relaxed text-center text-gray-300 md:mb-5'>

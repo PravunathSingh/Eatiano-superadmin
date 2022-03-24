@@ -148,6 +148,30 @@ const DashboardStats = () => {
           typeStyle='text-xl lg:text-2xl text-green-700 text-center font-medium'
         />
       </Link>
+
+      <Link
+        to='/otherStats'
+        className='w-full transition-all duration-200 bg-green-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
+      >
+        <DashboardCard
+          figures='Other Stats'
+          figureStyle='text-xl lg:text-2xl font-semibold mb-3 md:mb-5 text-green-900 text-center'
+          type={`Click to view`}
+          typeStyle='lg:text-lg text-green-700 text-center font-medium'
+        />
+      </Link>
+
+      <Link
+        to='/taxes'
+        className='w-full transition-all duration-200 bg-green-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
+      >
+        <DashboardCard
+          figures='Tax Details'
+          figureStyle='text-xl lg:text-2xl font-semibold mb-3 md:mb-5 text-green-900 text-center'
+          type={`Click to view`}
+          typeStyle='lg:text-lg text-green-700 text-center font-medium'
+        />
+      </Link>
     </div>
   );
 };

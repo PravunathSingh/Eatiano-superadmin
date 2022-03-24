@@ -8,11 +8,21 @@ const OtherStats = () => {
     year: '',
   });
 
+  const [monthlySaleData, setMonthlySaleData] = useState('');
+
   const [revenue, setRevenue] = useState({
     startDate: '',
     endDate: '',
   });
-  // const [profitRange, setProfitRange] = useState('');
+
+  const [revenueData, setRevenueData] = useState('');
+
+  const [profitRange, setProfitRange] = useState({
+    start: '',
+    end: '',
+  });
+
+  const [profitPercent, setProfitPercent] = useState('');
 
   const authCtx = useContext(Auth);
   const token = authCtx.token;
@@ -48,10 +58,16 @@ const OtherStats = () => {
 
     const resData = await response.data;
     console.log(resData);
+
+    setMonthlySaleData(resData.data);
   };
 
   const revenueHandler = (e) => {
     setRevenue({ ...revenue, [e.target.name]: e.target.value });
+  };
+
+  const profitRangeHandler = (e) => {
+    setProfitRange({ ...profitRange, [e.target.name]: e.target.value });
   };
 
   const getRevenue = async (e) => {
@@ -81,7 +97,42 @@ const OtherStats = () => {
 
     const resData = await response.data;
     console.log(resData);
+
+    setRevenueData(resData.data);
   };
+
+  const getProfit = async (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
+    };
+
+    const formData = new FormData();
+    formData.append('start_date', profitRange.startDate);
+    formData.append('end_date', profitRange.endDate);
+
+    const response = await axios.post(
+      'https://achievexsolutions.in/current_work/eatiano/api/super_admin/profit_range',
+      formData,
+      config
+    );
+
+    setProfitRange({
+      month: '',
+      year: '',
+    });
+
+    const resData = await response.data;
+    console.log(resData.profit_percent);
+
+    setProfitPercent(resData.profit_percent);
+  };
+
+  // console.log(profitPercent);
 
   return (
     <div className='container mt-24 md:mt-32 lg:mt-48 font-rubik'>
@@ -116,6 +167,15 @@ const OtherStats = () => {
               Get Data
             </button>
           </form>
+
+          <div className='px-5 py-8 my-10 rounded-lg bg-secondary'>
+            <h6 className='text-lg text-gray-200 lg:text-xl'>
+              Total Monthly Sale:{' '}
+              <span className='font-medium text-cta-dark'>
+                {monthlySaleData}
+              </span>
+            </h6>
+          </div>
         </div>
 
         <div className='w-full md:col-span-2 lg:col-span-3'>
@@ -148,6 +208,56 @@ const OtherStats = () => {
               Get Data
             </button>
           </form>
+
+          <div className='px-5 py-8 my-10 rounded-lg bg-secondary'>
+            <h6 className='text-lg text-gray-200 lg:text-xl'>
+              Total Revenue:{' '}
+              <span className='font-medium text-cta-dark'>
+                Rs. {revenueData}
+              </span>
+            </h6>
+          </div>
+        </div>
+
+        <div className='w-full md:col-span-2 lg:col-span-3'>
+          <h1 className='mb-6 text-xl text-gray-200 lg:mb-10 lg:text-2xl'>
+            Get Profit For A Date Range
+          </h1>
+          <form onSubmit={getProfit}>
+            <input
+              type='text'
+              placeholder='Start Date in YYYY-MM-DD Format'
+              className='w-full px-4 py-2 mb-4 text-gray-200 border-2 rounded-md border-secondary lg:text-lg bg-primary focus:ring-2 ring-offset-2 ring-offset-secondary'
+              name='startDate'
+              value={profitRange.startDate}
+              onChange={profitRangeHandler}
+            />
+
+            <input
+              type='text'
+              placeholder='End Date in YYYY-MM-DD Format'
+              className='w-full px-4 py-2 mb-4 text-gray-200 border-2 rounded-md border-secondary lg:text-lg bg-primary focus:ring-2 ring-offset-2 ring-offset-secondary'
+              name='endDate'
+              value={profitRange.endDate}
+              onChange={profitRangeHandler}
+            />
+
+            <button
+              type='submit'
+              className='w-full px-8 py-2 my-6 text-lg font-medium text-gray-900 transition-all duration-300 rounded-lg hover:text bg-cta md:text-xl hover:bg-cta-dark hover:scale-110 focus:ring-2 ring-offset-2 ring-cta-dark'
+            >
+              Get Data
+            </button>
+          </form>
+
+          <div className='px-5 py-8 my-10 rounded-lg bg-secondary'>
+            <h6 className='text-lg text-gray-200 lg:text-xl'>
+              Total Profit Percent:{' '}
+              <span className='font-medium text-cta-dark'>
+                {profitPercent}%
+              </span>
+            </h6>
+          </div>
         </div>
       </div>
     </div>

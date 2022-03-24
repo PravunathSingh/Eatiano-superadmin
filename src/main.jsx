@@ -12,17 +12,17 @@ import ExpenseProvider from './context/expensesContext';
 import AdminProvider from './context/adminContext';
 import WarehouseProvider from './context/warehouseContext';
 import OrdersProvider from './context/ordersContext';
-import OtherStatsProvider from './context/otherStatsContext';
+import TaxProvider from './context/taxContext';
 
 ReactDOM.render(
   <AuthProvider>
     <AdminProvider>
-      <OtherStatsProvider>
-        <RestaurantsProvider>
-          <BlogsProvider>
-            <CouponsProvider>
-              <MembershipsProvider>
-                <AgentsProvider>
+      <RestaurantsProvider>
+        <BlogsProvider>
+          <CouponsProvider>
+            <MembershipsProvider>
+              <AgentsProvider>
+                <TaxProvider>
                   <ExpenseProvider>
                     <WarehouseProvider>
                       <OrdersProvider>
@@ -32,12 +32,12 @@ ReactDOM.render(
                       </OrdersProvider>
                     </WarehouseProvider>
                   </ExpenseProvider>
-                </AgentsProvider>
-              </MembershipsProvider>
-            </CouponsProvider>
-          </BlogsProvider>
-        </RestaurantsProvider>
-      </OtherStatsProvider>
+                </TaxProvider>
+              </AgentsProvider>
+            </MembershipsProvider>
+          </CouponsProvider>
+        </BlogsProvider>
+      </RestaurantsProvider>
     </AdminProvider>
   </AuthProvider>,
   document.getElementById('root')

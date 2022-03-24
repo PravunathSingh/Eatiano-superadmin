@@ -33,10 +33,11 @@ import AllExpenses from './components/expenses/AllExpenses';
 import AddExpense from './components/expenses/addExpense/AddExpense';
 import AllAdmin from './components/admin/AllAdmin';
 import AddAdmin from './components/admin/addAdmin/AddAdmin';
-import AdminWarehouse from './components/admin/warehouse/AdminWarehouse';
-import AddWarehouse from './components/admin/warehouse/addWarehouse/AddWarehouse';
 import AllWarehouse from './components/warehouse/AllWarehouse';
 import OtherStats from './components/otherStats/OtherStats';
+import AllTaxes from './components/tax/AllTaxes';
+import AddTax from './components/tax/addTax/AddTax';
+import EditTax from './components/tax/editTax/EditTax';
 
 function App() {
   const authCtx = useContext(Auth);
@@ -65,6 +66,7 @@ function App() {
           <Route path='/blogs' element={<AllBlogs />} />
           <Route path='/coupons' element={<AllCoupons />} />
           <Route path='/admins' element={<AllAdmin />} />
+          <Route path='/taxes' element={<AllTaxes />} />
           <Route path='/expenses' element={<AllExpenses />} />
           <Route path='/warehouses' element={<AllWarehouse />} />
           <Route path='/memberships' element={<AllMemberships />} />
@@ -72,6 +74,7 @@ function App() {
           <Route path='/editRestaurant/:id' element={<EditRestaurant />} />
           <Route path='/editCoupon/:id' element={<EditCoupon />} />
           <Route path='/editProduct/:id' element={<EditProduct />} />
+          <Route path='/editTax/:id' element={<EditTax />} />
           <Route path='/editBlog/:id' element={<EditBlog />} />
           <Route path='/editMembership/:id' element={<EditMembership />} />
           <Route path='/blogDetails/:id' element={<BlogDetails />} />
@@ -85,6 +88,7 @@ function App() {
           <Route path='/deliveryAgents/add' element={<AddDelivery />} />
           <Route path='/coupons/add' element={<AddCoupon />} />
           <Route path='/blogs/add' element={<AddBlog />} />
+          <Route path='/taxes/add' element={<AddTax />} />
           <Route path='/memberships/add' element={<AddMembership />} />
           <Route path='/otherStats' element={<OtherStats />} />
           <Route path='*' element={<Error404 />} />

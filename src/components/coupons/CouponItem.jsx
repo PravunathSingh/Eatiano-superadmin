@@ -10,16 +10,16 @@ const CouponItem = ({ couponData }) => {
   };
 
   return (
-    <div>
-      <h6 className='mb-3 font-medium text-center text-gray-100 lg:text-lg'>
+    <div className='p-6 transition-all duration-200 rounded-lg shadow-lg bg-secondary hover:-translate-y-3'>
+      <h6 className='mb-5 text-xl font-medium text-center text-gray-100 lg:mb-8 lg:text-2xl'>
         {couponData.coupon_code}
       </h6>
       <h6 className='mb-4 font-medium text-center text-gray-200'>
-        Discount: {couponData.discount} %
+        Discount: <span className='text-border'>{couponData.discount} %</span>
       </h6>
       <p className='mb-4 text-sm font-light leading-relaxed text-center text-gray-300 md:mb-5'>
-        Coupon Applies When Order Amount is greater than {couponData.condition}{' '}
-        Rupees
+        Coupon Applies When Order Amount is greater than{' '}
+        <span className='text-cta-dark'>{couponData.condition} Rupees</span>
       </p>
 
       <div className='flex items-center justify-around mt-5'>
