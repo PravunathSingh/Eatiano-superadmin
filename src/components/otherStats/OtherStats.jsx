@@ -122,14 +122,14 @@ const OtherStats = () => {
     );
 
     setProfitRange({
-      month: '',
-      year: '',
+      start: '',
+      end: '',
     });
 
     const resData = await response.data;
-    console.log(resData.profit_percent);
+    console.log(resData.profit);
 
-    setProfitPercent(resData.profit_percent);
+    setProfitPercent(resData.profit);
   };
 
   // console.log(profitPercent);
@@ -252,9 +252,9 @@ const OtherStats = () => {
 
           <div className='px-5 py-8 my-10 rounded-lg bg-secondary'>
             <h6 className='text-lg text-gray-200 lg:text-xl'>
-              Total Profit Percent:{' '}
+              Total Profit:{' '}
               <span className='font-medium text-cta-dark'>
-                {profitPercent}%
+                Rs. {profitPercent}
               </span>
             </h6>
           </div>
