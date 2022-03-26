@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Agents } from '../../context/deliveryContext';
 
 const Agent = ({ agent }) => {
@@ -38,12 +39,21 @@ const Agent = ({ agent }) => {
         {agent.address}
       </p>
 
-      <button
-        className='text-brand-text hover:text-red-600'
-        onClick={deleteAgent}
-      >
-        <i className='fa fa-trash'></i> Delete Agent
-      </button>
+      <div className='flex flex-wrap items-center justify-between'>
+        <button
+          className='text-brand-text hover:text-red-600'
+          onClick={deleteAgent}
+        >
+          <i className='fa fa-trash'></i> Delete Agent
+        </button>
+
+        <Link
+          to={`/deliveryAgent/${agent.id}`}
+          className='text-blue-300 hover:text-blue-500'
+        >
+          Details
+        </Link>
+      </div>
     </div>
   );
 };

@@ -16,12 +16,6 @@ const AddDelivery = () => {
   const authCtx = useContext(Auth);
   const token = authCtx.token;
 
-  const [images, setImages] = useState([]);
-
-  const imageChange = (e) => {
-    setImages(e.target.files);
-  };
-
   // console.log(images[1]);
 
   const newDeliveryHandler = (e) => {
@@ -39,8 +33,6 @@ const AddDelivery = () => {
     };
 
     const formData = new FormData();
-    formData.append('idprof', images[0]);
-    formData.append('photo', images[1]);
     formData.append('name', newDelivery.name);
     formData.append('address', newDelivery.address);
     formData.append('phone', newDelivery.phone);
@@ -64,7 +56,6 @@ const AddDelivery = () => {
       aadhar: '',
       password: '',
     });
-    setImages([]);
 
     const resData = response.data;
     console.log(resData);
@@ -147,21 +138,6 @@ const AddDelivery = () => {
                 name='password'
                 value={newDelivery.password}
                 onChange={newDeliveryHandler}
-                className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
-              />
-            </div>
-
-            <div className='col-span-2 md:col-span-1'>
-              <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
-                <label>Id Proof & Profile Picture*</label>
-              </h6>
-              <input
-                type='file'
-                required
-                accept='image/*'
-                multiple
-                name='images'
-                onChange={imageChange}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />
             </div>

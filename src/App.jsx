@@ -38,6 +38,7 @@ import OtherStats from './components/otherStats/OtherStats';
 import AllTaxes from './components/tax/AllTaxes';
 import AddTax from './components/tax/addTax/AddTax';
 import EditTax from './components/tax/editTax/EditTax';
+import AgentDetails from './components/delivery/AgentDetails';
 
 function App() {
   const authCtx = useContext(Auth);
@@ -81,6 +82,7 @@ function App() {
           <Route path='/restaurantProducts/:id' element={<AllProducts />} />
           {/* <Route path='/admin/warehouse/:id' element={<AdminWarehouse />} /> */}
           <Route path='/restaurantProducts/add/:id' element={<AddProduct />} />
+          <Route path='/deliveryAgent/:id' element={<AgentDetails />} />
           {/* <Route path='/admin/warehouse/add/:id' element={<AddWarehouse />} /> */}
           <Route path='/restaurants/add' element={<AddRestaurant />} />
           <Route path='/expenses/add' element={<AddExpense />} />
