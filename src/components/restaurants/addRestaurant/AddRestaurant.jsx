@@ -51,7 +51,6 @@ const AddRestaurant = () => {
       address: '',
       lat: '',
       long: '',
-      address: '',
       metaData: '',
     });
     setRestaurantImage(null);

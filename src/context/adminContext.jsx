@@ -17,7 +17,6 @@ const AdminProvider = ({ children }) => {
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
       },
     };
 
