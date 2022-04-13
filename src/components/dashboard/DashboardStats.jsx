@@ -40,15 +40,15 @@ const DashboardStats = () => {
   const orders = ordersCtx.orders;
 
   return (
-    <div className='container grid gap-16 my-16 font-rubik md:grid-cols-2 lg:grid-cols-4 md:place-content-center place-items-center md:my-24 lg:my-32'>
+    <div className='container grid gap-16 my-16 font-rubik md:grid-cols-2 lg:grid-cols-4 md:place-content-center place-items-center md:my-16 lg:my-20'>
       <Link
-        to='/memberships'
+        to='/'
         className='w-full transition-all duration-200 bg-green-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
       >
         <DashboardCard
-          figures={memberships.length}
+          figures={orders}
           figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-green-900 text-center'
-          type='Membership Types'
+          type={`Today's Orders`}
           typeStyle='text-xl lg:text-2xl text-green-700 text-center font-medium'
         />
       </Link>
@@ -62,54 +62,6 @@ const DashboardStats = () => {
           figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-red-900 text-center'
           type='Restaurants'
           typeStyle='text-xl lg:text-2xl text-red-700 text-center font-medium'
-        />
-      </Link>
-
-      <Link
-        to='/blogs'
-        className='w-full transition-all duration-200 bg-yellow-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
-      >
-        <DashboardCard
-          figures={blogs.length}
-          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-yellow-900 text-center'
-          type='Blogs'
-          typeStyle='text-xl lg:text-2xl text-yellow-700 text-center font-medium'
-        />
-      </Link>
-
-      <Link
-        to='/coupons'
-        className='w-full transition-all duration-200 bg-blue-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
-      >
-        <DashboardCard
-          figures={coupons.length}
-          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-blue-900 text-center'
-          type='Coupons'
-          typeStyle='text-xl lg:text-2xl text-blue-700 text-center font-medium'
-        />
-      </Link>
-
-      <Link
-        to='/deliveryAgents'
-        className='w-full transition-all duration-200 bg-blue-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
-      >
-        <DashboardCard
-          figures={agents.length}
-          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-blue-900 text-center'
-          type='Delivery Partners'
-          typeStyle='text-xl lg:text-2xl text-blue-700 text-center font-medium'
-        />
-      </Link>
-
-      <Link
-        to='/expenses'
-        className='w-full transition-all duration-200 bg-blue-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
-      >
-        <DashboardCard
-          figures={expenses.length}
-          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-blue-900 text-center'
-          type='Expenses'
-          typeStyle='text-xl lg:text-2xl text-blue-700 text-center font-medium'
         />
       </Link>
 
@@ -138,14 +90,62 @@ const DashboardStats = () => {
       </Link>
 
       <Link
-        to='/'
+        to='/expenses'
+        className='w-full transition-all duration-200 bg-blue-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
+      >
+        <DashboardCard
+          figures={expenses.length}
+          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-blue-900 text-center'
+          type='Expenses'
+          typeStyle='text-xl lg:text-2xl text-blue-700 text-center font-medium'
+        />
+      </Link>
+
+      <Link
+        to='/memberships'
         className='w-full transition-all duration-200 bg-green-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
       >
         <DashboardCard
-          figures={orders}
+          figures={memberships.length}
           figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-green-900 text-center'
-          type={`Today's Orders`}
+          type='Membership Types'
           typeStyle='text-xl lg:text-2xl text-green-700 text-center font-medium'
+        />
+      </Link>
+
+      <Link
+        to='/coupons'
+        className='w-full transition-all duration-200 bg-blue-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
+      >
+        <DashboardCard
+          figures={coupons.length}
+          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-blue-900 text-center'
+          type='Coupons'
+          typeStyle='text-xl lg:text-2xl text-blue-700 text-center font-medium'
+        />
+      </Link>
+
+      <Link
+        to='/deliveryAgents'
+        className='w-full transition-all duration-200 bg-blue-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
+      >
+        <DashboardCard
+          figures={agents.length}
+          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-blue-900 text-center'
+          type='Delivery Partners'
+          typeStyle='text-xl lg:text-2xl text-blue-700 text-center font-medium'
+        />
+      </Link>
+
+      <Link
+        to='/blogs'
+        className='w-full transition-all duration-200 bg-yellow-100 shadow-lg rounded-xl py-14 hover:-translate-y-3'
+      >
+        <DashboardCard
+          figures={blogs.length}
+          figureStyle='text-4xl lg:text-5xl font-semibold mb-3 md:mb-5 text-yellow-900 text-center'
+          type='Blogs'
+          typeStyle='text-xl lg:text-2xl text-yellow-700 text-center font-medium'
         />
       </Link>
 

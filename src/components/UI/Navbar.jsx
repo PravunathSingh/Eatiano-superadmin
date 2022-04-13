@@ -51,20 +51,6 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               )}
-              {isLoggedIn && (
-                <li className='py-2 ml-6 font-medium text-gray-300 transition-all duration-200 md:text-lg hover:text-brand-text'>
-                  <NavLink
-                    to='/profile'
-                    className={({ isActive }) =>
-                      isActive
-                        ? 'text-brand-text'
-                        : 'text-gray-300 transition-all duration-200 hover:text-brand-text'
-                    }
-                  >
-                    My Profile
-                  </NavLink>
-                </li>
-              )}
 
               {isLoggedIn && (
                 <li
@@ -98,9 +84,6 @@ const Navbar = () => {
           <ul className='grid grid-cols-3 gap-6 list-none place-items-center'>
             <li className='py-2 text-gray-300 transition-all duration-200 md:text-lg hover:text-brand-text'>
               <NavLink to='/'>Dashboard</NavLink>
-            </li>
-            <li className='py-2 text-gray-300 transition-all duration-200 md:text-lg hover:text-brand-text'>
-              <NavLink to='/profile'>My Profile</NavLink>
             </li>
           </ul>
         </div>
